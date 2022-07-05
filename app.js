@@ -53,7 +53,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-//
+
 //mongoose.connect('mongodb+srv://newuser:newuser@cluster0.dark2.mongodb.net/grocit_db?retryWrites=true&w=majority');
 mongoose.connect(process.env.DB_CONNECT);
 

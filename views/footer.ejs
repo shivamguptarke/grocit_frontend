@@ -1,0 +1,119 @@
+
+        <!-- Footer -->
+        <footer class="content-footer footer bg-footer-theme">
+          <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+            <div class="mb-2 mb-md-0">
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              , made by
+              <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Built-IN Studio</a>
+            </div>
+        </footer>
+        <!-- / Footer -->
+
+        <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/assets/vendor/js/bootstrap.js"></script>
+    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="/assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script>
+      $(window).on('load', function(){
+          var url = window.location.href;
+          $('li').find('.active').removeClass('active');
+          $('li a').filter(function(){
+              return this.href == url;
+          }).parent().addClass('active');
+      });
+    </script>
+
+    <script>
+       $(function() {
+          // Multiple images preview in browser
+          var imagesPreview = function(input, placeToInsertImagePreview) {
+
+              console.log("uplaod 1");
+              if (input.files) {
+                  var filesAmount = input.files.length;
+                  console.log("uplaod " + filesAmount);
+                  $(placeToInsertImagePreview).empty();
+                  for (i = 0; i < filesAmount; i++) {
+                      var reader = new FileReader();
+
+                      reader.onload = function(event) {
+                        $(placeToInsertImagePreview).append($("<img/>", {src:this.result, height:100}));
+                          //$($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                      }
+                      console.log("uplaod 3" + input.files[i]);
+
+                      reader.readAsDataURL(input.files[i]);
+                  }
+              }
+
+          };
+
+          $('#upload').on('change', function() {
+              imagesPreview(this, 'div.productImage');
+          });
+
+          
+
+          // $(document).ready(function(){
+          //     async function configureDropDownLists(ddl1, ddl2) {
+          //       console.log('onchange dorpdown');
+              
+          //       var res = await fetch("http://localhost:3000/api/subcategory", {method: 'GET'});
+          //       console.log(res.json());
+          //       subitemsArrayNEW.forEach(element => {
+          //         console.log('onchange dorpdown');
+          //         if(element.categoryid == ddl1.value)
+          //         {
+          //           createOption(ddl2, element.name, element._id);
+          //         }
+          //       });
+          //     }
+
+          //     function createOption(ddl, text, value) {
+          //       var opt = document.createElement('option');
+          //       opt.value = value;
+          //       opt.text = text;
+          //       ddl.options.add(opt);
+          //     }
+          //     $("#categoryid").on("change",configureDropDownLists(this,document.getElementById('subcategoryid')));
+          // });
+
+      });
+    </script>
+  </body>
+</html>

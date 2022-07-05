@@ -1,0 +1,101 @@
+<%- include('header') -%> 
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Products /</span> Add Product</h4>
+
+              <div class="card mb-4">
+                <h5 class="card-header">Profile Details</h5>
+                <!-- Account -->
+                <hr class="my-0">
+                <div class="card-body">
+                  <form id="formAccountSettings" method="POST" onsubmit="AddProduct" enctype="multipart/form-data">
+                    <div class="card-body">
+                      <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <div class="productImage" width="100" height="100" id="productImage"></div>
+                        <div class="button-wrapper">
+                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                            <span class="d-none d-sm-block">Upload new product image</span>
+                            <i class="bx bx-upload d-block d-sm-none"></i>
+                            <input type="file" id="upload" class="account-file-input" name="productImage" accept="image/png, image/jpeg" multiple required>
+                          </label>
+                          <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                            <i class="bx bx-reset d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Reset</span>
+                          </button>
+    
+                          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-md-6">
+                        <label for="name" class="form-label">Product Name</label>
+                        <input class="form-control" type="text" id="name" name="name" value="Dabur Honey" autofocus="" required>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="categoryid">Category</label>
+                        <select id="categoryid" class="select2 form-select" name="categoryid" required>
+                          <option value="">Select Category</option>
+                          <% itemsArray.forEach(i => { %>
+                            <option value="<%- i._id %>"><%- i.name %></option>
+                          <% }) %>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label" for="categoryid">Sub-Category</label>
+                        <select id="subcategoryid" class="select2 form-select" name="subcategoryid" required>
+                          <option value="">Select Sub-Category</option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="firstName" class="form-label">Description</label>
+                        <input class="form-control" type="text" id="description" name="description" value="-" autofocus="">
+                      </div>
+                      <div class="form-check" style="margin: 2% 1%;">
+                        <input class="form-check-input" type="checkbox" value='1' id="status" checked="" name="status">
+                        <label class="form-check-label" for="status">Visible </label>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <button type="submit" class="btn btn-primary me-2">Add Product</button>
+                      <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /Account -->
+              </div>
+
+            <!-- / Content -->
+      
+            <script type="text/javascript">
+                document.getElementById('categoryid').addEventListener('change', function() {
+                  console.log('You selected: ', this.value);
+                  console.log('onchange dorpdown------');
+                  var tempArrayString = '<%- JSON.stringify(itemsArray) %>'; 
+                    $('#subcategoryid').html('');
+                    console.log(tempArrayString);
+                    var categoryArray = $.parseJSON(tempArrayString);
+                    console.log(categoryArray);
+
+                    categoryArray.forEach(cat => {
+                      if(cat._id == this.value){
+                        console.log("here" + cat.name);
+                        if(cat.subcategory.length> 0){
+                          cat.subcategory.forEach(subcat => {
+                            $('#subcategoryid').append("<option value=\"" +  subcat._id + "\">" + subcat.name + "</option>");
+                          })    
+                        }
+                      }
+                    })
+                    
+                });
+            </script>
+    
+
+<%- include('footer') -%>
+        
